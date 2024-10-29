@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "28024157066",
+    "project_id": "baladna-go",
+    "storage_bucket": "baladna-go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28024157066:android:0947789e690734e3574e73",
+        "android_client_info": {
+          "package_name": "com.fatma.baladna_go"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmR4VJvYBd4oCSdZbW9qQi1ot8sESsF8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
