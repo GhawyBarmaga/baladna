@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable, must_be_immutable
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +13,7 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../controller/maincontroller.dart';
 
 import 'like_button.dart';
+import 'review_user_screen.dart';
 
 class CardProducts extends StatefulWidget {
   final int index;
@@ -169,7 +172,7 @@ class _CardProductsState extends State<CardProducts>
                       Expanded(
                           child: Row(
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -186,20 +189,25 @@ class _CardProductsState extends State<CardProducts>
                                 return Text("$countlike  اعجبنى");
                               }),
                           //==================Add Reveiw====================
-                          // ElevatedButton(
-                          //     style: ElevatedButton.styleFrom(
-                          //       backgroundColor: HexColor("00B2E7"),
-                          //     ),
-                          //     onPressed: () {
-                          //       Get.to(() =>
-                          //           UsersReveiewScreen(proid: widget.proid));
-                          //     },
-                          //     child: const Text(
-                          //       "Add Review",
-                          //       style: TextStyle(
-                          //           color: Colors.white,
-                          //           fontWeight: FontWeight.bold),
-                          //     )),
+                          const Spacer(),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10.0),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.amber,
+                                ),
+                                onPressed: () {
+                                  Get.to(() =>
+                                      UsersReveiewScreen(proid: widget.proid));
+                                  log(widget.proid);
+                                },
+                                child: const Text(
+                                  "Add Review",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
                           //===================================================
                           // const Text("اتصال"),
                           // IconButton(
