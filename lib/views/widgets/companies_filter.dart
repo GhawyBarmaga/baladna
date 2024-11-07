@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -24,19 +25,23 @@ class CompaniesFilter extends StatelessWidget {
                 margin: EdgeInsets.only(top: Get.height * 0.01),
                 padding: EdgeInsets.only(top: Get.height * 0.01),
                 width: Get.width * .4,
+                // height: Get.height * .5,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      HexColor("2B5876"),
-                      HexColor("4E4376"),
+                      //HexColor("00B2E7"),
+                      HexColor("E064F7"),
+                      HexColor("FF8D6C"),
                     ]),
                     borderRadius: BorderRadius.circular(13.0)),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  doc["companyname"],
-                  style: const TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                child: Center(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    doc["companyname"],
+                    style: const TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ));

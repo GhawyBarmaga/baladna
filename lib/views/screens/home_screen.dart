@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Get.put(MainController().fetchProducts());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
@@ -101,8 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       name: controller.searchtxt,
                       sufxicon: const Icon(Icons.search)),
 
+                  Text(
+                    "الشركات",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(
-                    height: Get.height * 0.08,
+                    height: Get.height * 0.2,
                     //========================companies===================================
                     child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance

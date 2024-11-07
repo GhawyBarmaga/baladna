@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }) async {
       try {
         if (email!.isNotEmpty || password!.isNotEmpty) {
-           if (ischecked == true) {
+          if (ischecked == true) {
             localstorage.write("email", email.trim());
             localstorage.write("password", password?.trim());
           }
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/login.png'), // Path to your image
+                image: AssetImage('assets/login_2.png'), // Path to your image
                 fit: BoxFit.cover,
               ),
             ),
@@ -93,139 +93,157 @@ class _LoginScreenState extends State<LoginScreen> {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Card(
-                color: Colors.white.withOpacity(0.85),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: fkey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Username field
-
-                        CustomForm(
-                          validator: (p0) =>
-                              p0!.isEmpty ? "Required Field" : null,
-                          text: " Your Email",
-                          type: TextInputType.emailAddress,
-                          name: email,
-                          sufxicon: const Icon(Icons.email),
-                        ),
-                        const SizedBox(height: 16),
-                        CustomPass(
-                            validator: (p0) =>
-                                p0!.isEmpty ? "Required Field" : null,
-                            text: "  Your Password",
-                            type: TextInputType.visiblePassword,
-                            issecure: issecure,
-                            name: password,
-                            sufxicon: InkWell(
-                              onTap: () {
-                                issecure = !issecure;
-                                setState(() {});
-                              },
-                              child: Icon(issecure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                            )),
-                        Column(
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Get.to(() => const ForgotPass());
-                                },
-                                child: const Text(
-                                  " Forgot Password ?",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                          ],
-                        ),
-                        //const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Remember Me",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Checkbox(
-                                activeColor: HexColor("8a2be2"),
-                                checkColor: Colors.white,
-                                side: const BorderSide(color: Colors.black),
-                                value: ischecked,
-                                onChanged: (value) {
-                                  ischecked = !ischecked;
-                                  setState(() {});
-                                }),
-                          ],
-                        ),
-
-                        // Password field
-
-                        const SizedBox(height: 24),
-
-                        // Register button
-                        ElevatedButton(
-                          onPressed: () {
-                            if (fkey.currentState!.validate()) {
-                              loginUser(
-                                email: email.text,
-                                password: password.text,
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
-                          ),
-                          child: isloading
-                              ? const CircularProgressIndicator(
-                                  color: Colors.amber,
-                                )
-                              : const Text(
-                                  ' Login',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                        ),
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-                        Row(
-                          children: [
-                            const Center(
-                                child: Text(
-                              "You don't have an account? ",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            TextButton(
-                                onPressed: () {
-                                  Get.to(() => const RegisterScreen());
-                                },
-                                child: const Text("Register",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18)))
-                          ],
-                        ),
-                      ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.account_circle,
+                      size: 70,
+                      color: Colors.white,
                     ),
-                  ),
+                    Card(
+                      color: Colors.white.withOpacity(0.50),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Form(
+                          key: fkey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Username field
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              CustomForm(
+                                validator: (p0) =>
+                                    p0!.isEmpty ? "Required Field" : null,
+                                text: " Your Email",
+                                type: TextInputType.emailAddress,
+                                name: email,
+                                sufxicon: const Icon(Icons.email),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomPass(
+                                  validator: (p0) =>
+                                      p0!.isEmpty ? "Required Field" : null,
+                                  text: "  Your Password",
+                                  type: TextInputType.visiblePassword,
+                                  issecure: issecure,
+                                  name: password,
+                                  sufxicon: InkWell(
+                                    onTap: () {
+                                      issecure = !issecure;
+                                      setState(() {});
+                                    },
+                                    child: Icon(issecure
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                  )),
+                              Column(
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.to(() => const ForgotPass());
+                                      },
+                                      child: const Text(
+                                        " Forgot Password ?",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      )),
+                                ],
+                              ),
+                              //const Spacer(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Remember Me",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                  Checkbox(
+                                      activeColor: HexColor("8a2be2"),
+                                      checkColor: Colors.white,
+                                      side:
+                                          const BorderSide(color: Colors.black),
+                                      value: ischecked,
+                                      onChanged: (value) {
+                                        ischecked = !ischecked;
+                                        setState(() {});
+                                      }),
+                                ],
+                              ),
+
+                              // Password field
+
+                              const SizedBox(height: 24),
+
+                              // Register button
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (fkey.currentState!.validate()) {
+                                    loginUser(
+                                      email: email.text,
+                                      password: password.text,
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blueAccent,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50, vertical: 15),
+                                ),
+                                child: isloading
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.amber,
+                                      )
+                                    : const Text(
+                                        ' Login',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                              ),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              Row(
+                                children: [
+                                  const Center(
+                                      child: Text(
+                                    "You don't have an account? ",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.to(() => const RegisterScreen());
+                                      },
+                                      child: const Text("Register",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18)))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
