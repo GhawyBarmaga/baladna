@@ -97,13 +97,16 @@ class HomeAdmin extends StatelessWidget {
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold))
                             ])),
-                            // trailing: IconButton(
-                            //     onPressed: () {
-                            //       ctrl.deleteproduct(
-                            //           snapshot.data?.docs[index]['proid'],
-                            //           snapshot.data?.docs[index]['proimg']);
-                            //     },
-                            //     icon: const Icon(Icons.delete)),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  ctrl.deleteproduct(
+                                      snapshot.data?.docs[index]['proid'],
+                                      snapshot.data?.docs[index]['proimg']);
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                )),
                           ),
                         );
                       },
