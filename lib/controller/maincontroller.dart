@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_overrides, unused_field, unrelated_type_equality_checks, unused_element, await_only_futures, collection_methods_unrelated_type, void_checks, avoid_print, dead_code
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,16 +85,20 @@ class MainController extends GetxController {
   //==========================filter products by company========================
   Future<void> filterProductsByCompany(datacomp) async {
     try {
-      pro.clear();
-      update();
-      QuerySnapshot q =
-          await FirebaseFirestore.instance.collection("products").get();
+      if (datacomp != null) {
+        pro.clear();
+        update();
+        QuerySnapshot q =
+            await FirebaseFirestore.instance.collection("products").get();
 
-      pro.addAll(q.docs
-          .where((element) => element["company"].contains(datacomp))
-          .toList());
+        pro.addAll(q.docs
+            .where((element) => element["company"].contains(datacomp))
+            .toList());
 
-      update();
+        update();
+      } else {
+        log("error");
+      }
     } catch (e) {
       print(e.toString());
     }

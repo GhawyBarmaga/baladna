@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   TextEditingController productprice = TextEditingController();
   TextEditingController addresscompany = TextEditingController();
   TextEditingController phoncompany = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   String? selectedValue;
   File? imageSelected;
@@ -56,23 +57,29 @@ class HomeController extends GetxController {
     await ref.putFile(imageSelected!);
     final imageurl = await ref.getDownloadURL();
     try {
-      await FirebaseFirestore.instance.collection("products").doc(uuid).set({
-        "proid": uuid,
-        "productname": productname.text,
-        "addresscompany": addresscompany.text,
-        "phoncompany": phoncompany.text,
-        "productdesc": productdesc.text,
-        "proimg": imageurl,
-        "productprice": formattedCurrency,
-        "company": selectedValue,
-        "date_creation": formatter.format(now),
-        "likes": []
-      });
+      if (selectedValue == null) {
+        Get.snackbar("Error", "ادخل اسم الشركة",
+            backgroundColor: Colors.deepPurple, colorText: Colors.white);
+        return;
+      } else {
+        await FirebaseFirestore.instance.collection("products").doc(uuid).set({
+          "proid": uuid,
+          "productname": productname.text,
+          "addresscompany": addresscompany.text,
+          "phoncompany": phoncompany.text,
+          "productdesc": productdesc.text,
+          "proimg": imageurl,
+          "productprice": formattedCurrency,
+          "company": selectedValue,
+          "date_creation": formatter.format(now),
+          "likes": []
+        });
 
-      Get.snackbar("Success", "تم الحفظ بنجاح",
-          backgroundColor: Colors.deepPurple, colorText: Colors.white);
-      clearcontent();
-      update();
+        Get.snackbar("Success", "تم الحفظ بنجاح",
+            backgroundColor: Colors.deepPurple, colorText: Colors.white);
+        clearcontent();
+        update();
+      }
     } on FirebaseException catch (e) {
       Get.snackbar("faild", e.toString(), colorText: Colors.red);
     }

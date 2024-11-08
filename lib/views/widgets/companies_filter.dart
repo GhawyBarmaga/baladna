@@ -17,7 +17,7 @@ class CompaniesFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
-        builder: (MainController controller) => GestureDetector(
+        builder: (MainController controller) =>GestureDetector(
               onTap: () {
                 controller.filterProductsByCompany(doc["companyname"]);
               },

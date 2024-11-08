@@ -41,117 +41,131 @@ class AddProduct extends StatelessWidget {
             child: SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    CustomForm(
-                      text: "اكتب اسم المنتج",
-                      type: TextInputType.name,
-                      name: controller.productname,
-                    ),
-                    const SizedBox(height: 10.0),
-                    CustomForm(
-                        text: "العنوان",
-                        type: TextInputType.streetAddress,
-                        name: controller.addresscompany),
-                    const SizedBox(height: 10.0),
-                    CustomForm(
-                        formating: [LengthLimitingTextInputFormatter(11)],
-                        text: "رقم التليفون",
-                        type: TextInputType.phone,
-                        name: controller.phoncompany),
-                    const SizedBox(height: 10.0),
-                    CustomForm(
-                        text: "وصف المنتج",
+                child: Form(
+                  key: controller.formkey,
+                  child: Column(
+                    children: [
+                      CustomForm(
+                        validator: (p0) => p0!.isEmpty ? "ادخل اسم المنتج" : null,
+                        text: "اكتب اسم المنتج",
                         type: TextInputType.name,
-                        name: controller.productdesc,
-                        maxLines: 3,
-                        maxlentgh: 150),
-                    const SizedBox(height: 10.0),
-                    CustomForm(
-                        text: "السعر ",
-                        type: TextInputType.number,
-                        name: controller.productprice),
-                    const SizedBox(height: 10.0),
-                    //======مكان تحميل الصوره
-                    controller.imageSelected == null
-                        ? const Text("يجب اختيار صوره اولا")
-                        : Image.file(controller.imageSelected!,
-                            height: h * 0.3, width: w * 0.3),
-                    IconButton(
-                        onPressed: () {
-                          controller.pickedImage();
-                        },
-                        icon: const Icon(
-                          Icons.upload,
-                          size: 30,
-                        )),
-                    const Text("تحميل صورة المنتج"),
-                    SizedBox(
-                      height: h * 0.05,
-                    ),
-                    //==================================================
-                    const SizedBox(height: 10.0),
-                    IconButton(
-                        onPressed: () {
-                          Get.dialog(AlertDialog(
-                            actions: [
-                              TextField(
-                                controller: controller.companyname,
-                                decoration: InputDecoration(
-                                    hintText: "اسم الشركه",
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    )),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.deepPurple,
-                                          foregroundColor: Colors.white),
-                                      onPressed: () {
-                                        controller.addCompanies();
-                                        Get.back();
-                                      },
-                                      child: const Text(
-                                        "اضافة الشركه",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
+                        name: controller.productname,
+                      ),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                        validator: (p0) => p0!.isEmpty ? "ادخل اسم الشركه" : null,
+                          text: "العنوان",
+                          type: TextInputType.streetAddress,
+                          name: controller.addresscompany),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                          validator: (p0) => p0!.isEmpty
+                              ? "ادخل رقم التليفون"
+                              : null,
+                          formating: [LengthLimitingTextInputFormatter(11)],
+                          text: "رقم التليفون",
+                          type: TextInputType.phone,
+                          name: controller.phoncompany),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                          validator: (p0) => p0!.isEmpty ? "ادخل وصف المنتج" : null,
+                          text: "وصف المنتج",
+                          type: TextInputType.name,
+                          name: controller.productdesc,
+                          maxLines: 3,
+                          maxlentgh: 150),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                        validator: (p0) => p0!.isEmpty ? "ادخل السعر" : null,
+                          text: "السعر ",
+                          type: TextInputType.number,
+                          name: controller.productprice),
+                      const SizedBox(height: 10.0),
+                      //======مكان تحميل الصوره
+                      controller.imageSelected == null
+                          ? const Text("يجب اختيار صوره اولا")
+                          : Image.file(controller.imageSelected!,
+                              height: h * 0.3, width: w * 0.3),
+                      IconButton(
+                          onPressed: () {
+                            controller.pickedImage();
+                          },
+                          icon: const Icon(
+                            Icons.upload,
+                            size: 30,
+                          )),
+                      const Text("تحميل صورة المنتج"),
+                      SizedBox(
+                        height: h * 0.05,
+                      ),
+                      //==================================================
+                      const SizedBox(height: 10.0),
+                      IconButton(
+                          onPressed: () {
+                            Get.dialog(AlertDialog(
+                              actions: [
+                                TextField(
+                                 
+                                  controller: controller.companyname,
+                                  decoration: InputDecoration(
+                                      hintText: "اسم الشركه",
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
                                       )),
-                                  IconButton(
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                      icon: const Icon(Icons.cancel))
-                                ],
-                              ),
-                            ],
-                          ));
-                        },
-                        icon: const Icon(Icons.add, size: 30)),
-                    const Text("اضف شركه"),
-                    const SizedBox(height: 10.0),
-
-                    const FirebaseDropdownMenuItem(),
-
-                    const SizedBox(height: 20.0),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple,
-                            foregroundColor: Colors.white),
-                        onPressed: () {
-                          controller.addproduct();
-                        },
-                        child: const Text(
-                          "اضافة الاعلان",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ))
-                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.deepPurple,
+                                            foregroundColor: Colors.white),
+                                        onPressed: () {
+                                          controller.addCompanies();
+                                          Get.back();
+                                        },
+                                        child: const Text(
+                                          "اضافة الشركه",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    IconButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        icon: const Icon(Icons.cancel))
+                                  ],
+                                ),
+                              ],
+                            ));
+                          },
+                          icon: const Icon(Icons.add, size: 30)),
+                      const Text("اضف شركه"),
+                      const SizedBox(height: 10.0),
+                  
+                      const FirebaseDropdownMenuItem(),
+                  
+                      const SizedBox(height: 20.0),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple,
+                              foregroundColor: Colors.white),
+                          onPressed: () {
+                            if( controller.formkey.currentState!.validate()) {
+                               controller.addproduct();
+                            }
+                           
+                          },
+                          child: const Text(
+                            "اضافة الاعلان",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),

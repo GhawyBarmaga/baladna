@@ -102,7 +102,8 @@ class _CardProductsState extends State<CardProducts>
               Card(
                 child: Container(
                   width: Get.width,
-                  height: Get.height * 0.5,
+                  height: Get.height * 0.6,
+                  // margin: const EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                       color: HexColor('F5F5F5'),
                       borderRadius: BorderRadius.circular(30),

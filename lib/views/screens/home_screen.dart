@@ -12,6 +12,7 @@ import '../widgets/card_products.dart';
 import '../widgets/companies_filter.dart';
 import '../widgets/components.dart';
 import 'add_products.dart';
+import 'admin_login_screen.dart';
 import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,16 +59,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.red,
               ),
               actions: [
-                TextButton(
-                    onPressed: () {
-                      Get.to(() => const AddProduct());
-                    },
-                    child: Text(
-                      "اضافة اعلان جديد",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orangeAccent),
-                    ))
+                PopupMenuButton(
+                    icon: Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    ),
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          child: TextButton(
+                              onPressed: () {
+                                Get.to(() => AddProduct());
+                              },
+                              child: Text(
+                                " اضافة اعلان جديد",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                        PopupMenuItem(
+                          child: TextButton(
+                              onPressed: () {
+                                Get.to(() => AdminLogin());
+                              },
+                              child: Text(
+                                "   ادارة التطبيق",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                      ];
+                    })
                 //====================================drawer=============================
                 // IconButton(
                 //   onPressed: () {
@@ -102,12 +126,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       name: controller.searchtxt,
                       sufxicon: const Icon(Icons.search)),
 
-                  Text(
-                    "الشركات",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton.icon(
+                        onPressed: () {
+                          controller.refreshProducts();
+                        },
+                        icon: Icon(Icons.refresh),
+                        label: Text("Refresh",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      Text(
+                        "الشركات",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.2,
+                      )
+                    ],
                   ),
                   SizedBox(
-                    height: Get.height * 0.2,
+                    height: Get.height * 0.08,
                     //========================companies===================================
                     child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
